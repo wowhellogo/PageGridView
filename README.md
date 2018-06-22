@@ -1,5 +1,5 @@
 # PageGridView
-ViewPager+GridView组合控件实现ViewPager+GridView实现网格布局分页效果
+ViewPager+GridView组合控件实现网格布局分页效果
 
 ## PageGridView自定义属性：
 属性名 | 说明 | 默认值
