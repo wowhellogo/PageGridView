@@ -10,6 +10,11 @@ isShowIndicator         | 是否显示指示器          | true
 selectedIndicator       | 选中指示点资源ID        | R.mipmap.ic_dot_selected
 unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_normal
 
+## 效果图
+
+![效果图](/img/image1.jpg  =768x1028)
+
+
 ## VpGridView使用
 ### 布局
 
