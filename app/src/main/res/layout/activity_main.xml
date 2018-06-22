@@ -13,14 +13,9 @@
         android:layout_height="wrap_content"
         app:numColumns="4"
         app:pageSize="4"
+        app:selectedIndicator="@mipmap/ic_dot_selected"
+        app:unSelectedIndicator="@mipmap/ic_dot_normal"
         app:isShowIndicator="true"
         />
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="添加数据刷新"
-        />
-
 
 </LinearLayout>

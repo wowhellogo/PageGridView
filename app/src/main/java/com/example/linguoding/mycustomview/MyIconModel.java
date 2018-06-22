@@ -11,7 +11,6 @@ public class MyIconModel extends VpGridView.ItemModel {
     private int iconId;
 
 
-
     public String getName() {
         return name;
     }

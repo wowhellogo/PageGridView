@@ -30,16 +30,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mList.add(new MyIconModel("添加测试数据",R.mipmap.ic_launcher));
-                mVpGridView.setData(mList);
-            }
-        });
     }
 
     private void initData() {
