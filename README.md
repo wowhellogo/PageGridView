@@ -13,7 +13,7 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
 ## VpGridView使用
 ### 布局
 
-、、、xml
+```xml
 
  <com.vpgridviewlibrary.VpGridView
         android:id="@+id/vp_grid_view"
@@ -26,13 +26,11 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
         app:isShowIndicator="true"
         />
 
-
-、、、
-
+```
 ### Model
 继承VpGridView.ItemModel 为item赋值和设置图标
 
-、、、java
+```java
 
 public class MyIconModel extends VpGridView.ItemModel {
     private String name;
@@ -73,11 +71,11 @@ public class MyIconModel extends VpGridView.ItemModel {
     }
 }
 
-、、、
+```
 
 ### setData
 
-、、、java
+```java
 
 public class MainActivity extends AppCompatActivity {
 
