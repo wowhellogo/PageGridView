@@ -4,11 +4,10 @@
     android:layout_height="wrap_content">
     <!-- 小圆点View -->
     <ImageView
-        android:layout_marginBottom="2dp"
         android:id="@+id/v_dot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:src="@mipmap/ic_menu_dot_normal"/>
+        android:src="@mipmap/ic_dot_normal"
+        android:layout_margin="2dp"
+        />
 </RelativeLayout>

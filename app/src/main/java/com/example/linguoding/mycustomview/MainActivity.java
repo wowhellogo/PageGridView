@@ -2,6 +2,7 @@ package com.example.linguoding.mycustomview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.vpgridviewlibrary.VpGridView;
@@ -25,6 +26,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(MainActivity.this,position+"",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mList.add(new MyIconModel("添加测试数据",R.mipmap.ic_launcher));
+                mVpGridView.setData(mList);
             }
         });
     }

@@ -30,6 +30,9 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
     public final static int PAGE_Size = 8;
     public final static int NUM_COUNT = 4;
     public final static boolean IS_ShOW_INDICATOR = true;
+    public final static int SELECTED_INDICTOR=R.mipmap.ic_dot_selected;
+    public final static int UN_SELECTED_INDICTOR=R.mipmap.ic_dot_normal;
+
     private Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
@@ -54,6 +57,8 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
 
     private int numColumns = 0;
     private boolean isShowIndicator;
+    private int selectedIndicator;
+    private int unSelectedIndicator;
 
 
     public VpGridView(Context context) {
@@ -77,8 +82,8 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
         pageSize = typedArray.getInteger(R.styleable.VpGridView_pageSize, PAGE_Size);
         numColumns = typedArray.getInteger(R.styleable.VpGridView_numColumns, NUM_COUNT);
         isShowIndicator = typedArray.getBoolean(R.styleable.VpGridView_isShowIndicator, IS_ShOW_INDICATOR);
-        typedArray.getResourceId(R.styleable.VpGridView_selectedIndicator, 0);
-        typedArray.getResourceId(R.styleable.VpGridView_unSelectedIndicator, 0);
+        selectedIndicator=typedArray.getResourceId(R.styleable.VpGridView_selectedIndicator, SELECTED_INDICTOR);
+        unSelectedIndicator=typedArray.getResourceId(R.styleable.VpGridView_unSelectedIndicator, UN_SELECTED_INDICTOR);
 
         typedArray.recycle();
     }
@@ -90,7 +95,7 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
         mViewPager = mContentView.findViewById(R.id.view_pager);
         RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        //动态设备ViewPager
+        //动态设置ViewPager
         float rate= (float) pageSize / (float) numColumns;
         int rows= (int) Math.ceil(rate);
         layoutParams.height=rows*getDimensionPixelOffset(R.dimen.item_height);
@@ -144,23 +149,24 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
      * 设置圆点
      */
     public void setOvalLayout() {
+        if(mLlDot.getChildCount()>0) mLlDot.removeAllViews();
         for (int i = 0; i < pageCount; i++) {
             mLlDot.addView(mInflater.inflate(R.layout.dot, null));
         }
         // 默认显示第一页
         ImageView imageView = mLlDot.getChildAt(0).findViewById(R.id.v_dot);
-        imageView.setImageResource(R.mipmap.ic_menu_dot_selected);
+        imageView.setImageResource(selectedIndicator);
 
         mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
             public void onPageSelected(int position) {
                 // 取消圆点选中
                 ImageView lastImageView = mLlDot.getChildAt(curIndex)
                         .findViewById(R.id.v_dot);
-                lastImageView.setImageResource(R.mipmap.ic_menu_dot_normal);
+                lastImageView.setImageResource(unSelectedIndicator);
                 // 圆点选中
                 ImageView nextImageView = mLlDot.getChildAt(position)
                         .findViewById(R.id.v_dot);
-                nextImageView.setImageResource(R.mipmap.ic_menu_dot_selected);
+                nextImageView.setImageResource(selectedIndicator);
                 curIndex = position;
             }
         });
