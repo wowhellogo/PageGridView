@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.vpgridviewlibrary.VpGridView
+    <com.pagegridviewlibrary.PageGridView
         android:id="@+id/vp_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

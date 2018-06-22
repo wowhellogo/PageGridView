@@ -1,7 +1,7 @@
 # VpGridView
 ViewPager+GridView组合控件实现ViewPager+GridView实现网格布局分页效果
 
-## VpGridView自定义属性：
+## PageGridView自定义属性：
 属性名 | 说明 | 默认值
 :----------- | :----------- | :-----------
 pageSize                | 每页大小               | 8
@@ -14,21 +14,23 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
 <img src="./img/image1.jpg"  height="800" width="480">
 
 
-## VpGridView使用
+## PageGridView使用
 ### 布局
 
 ```xml
 
- <com.vpgridviewlibrary.VpGridView
-        android:id="@+id/vp_grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:numColumns="4"
-        app:pageSize="4"
-        app:selectedIndicator="@mipmap/ic_dot_selected"
-        app:unSelectedIndicator="@mipmap/ic_dot_normal"
-        app:isShowIndicator="true"
-        />
+
+  <com.pagegridviewlibrary.PageGridView
+          android:id="@+id/vp_grid_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:numColumns="4"
+          app:pageSize="4"
+          app:selectedIndicator="@mipmap/ic_dot_selected"
+          app:unSelectedIndicator="@mipmap/ic_dot_normal"
+          app:isShowIndicator="true"
+          />
+
 
 ```
 ### Model
@@ -36,7 +38,7 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
 
 ```java
 
-public class MyIconModel extends VpGridView.ItemModel {
+public class MyIconModel extends PageGridView.ItemModel {
     private String name;
 
 
@@ -85,15 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
     List<MyIconModel> mList;
 
-    private VpGridView<MyIconModel> mVpGridView;
+    private PageGridView<MyIconModel> mPageGridView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mVpGridView=findViewById(R.id.vp_grid_view);
+        mPageGridView =findViewById(R.id.vp_grid_view);
         initData();
-        mVpGridView.setData(mList);
-        mVpGridView.setOnItemClickListener(new VpGridView.OnItemClickListener() {
+        mPageGridView.setData(mList);
+        mPageGridView.setOnItemClickListener(new PageGridView.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(MainActivity.this,position+"",Toast.LENGTH_SHORT).show();

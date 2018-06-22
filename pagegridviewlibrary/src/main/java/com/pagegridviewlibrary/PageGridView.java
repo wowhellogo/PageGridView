@@ -1,4 +1,4 @@
-package com.vpgridviewlibrary;
+package com.pagegridviewlibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,17 +20,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vpgridviewlibrary.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * ViewPager+GridView实现左右滑动查看更多分类的控件
  */
-public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
+public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout {
     public final static int PAGE_Size = 8;
     public final static int NUM_COUNT = 4;
     public final static boolean IS_ShOW_INDICATOR = true;
-    public final static int SELECTED_INDICTOR=R.mipmap.ic_dot_selected;
+    public final static int SELECTED_INDICTOR= R.mipmap.ic_dot_selected;
     public final static int UN_SELECTED_INDICTOR=R.mipmap.ic_dot_normal;
 
     private Context mContext;
@@ -61,16 +63,16 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
     private int unSelectedIndicator;
 
 
-    public VpGridView(Context context) {
+    public PageGridView(Context context) {
         this(context, null, 0);
     }
 
-    public VpGridView(Context context, @Nullable AttributeSet attrs) {
+    public PageGridView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
 
     }
 
-    public VpGridView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PageGridView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(context, attrs);
         initViews(context);
@@ -78,12 +80,12 @@ public class VpGridView<T extends VpGridView.ItemModel> extends FrameLayout {
 
 
     private void initAttrs(Context context, AttributeSet attributeSet) {
-        TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.VpGridView);
-        pageSize = typedArray.getInteger(R.styleable.VpGridView_pageSize, PAGE_Size);
-        numColumns = typedArray.getInteger(R.styleable.VpGridView_numColumns, NUM_COUNT);
-        isShowIndicator = typedArray.getBoolean(R.styleable.VpGridView_isShowIndicator, IS_ShOW_INDICATOR);
-        selectedIndicator=typedArray.getResourceId(R.styleable.VpGridView_selectedIndicator, SELECTED_INDICTOR);
-        unSelectedIndicator=typedArray.getResourceId(R.styleable.VpGridView_unSelectedIndicator, UN_SELECTED_INDICTOR);
+        TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.PageGridView);
+        pageSize = typedArray.getInteger(R.styleable.PageGridView_pageSize, PAGE_Size);
+        numColumns = typedArray.getInteger(R.styleable.PageGridView_numColumns, NUM_COUNT);
+        isShowIndicator = typedArray.getBoolean(R.styleable.PageGridView_isShowIndicator, IS_ShOW_INDICATOR);
+        selectedIndicator=typedArray.getResourceId(R.styleable.PageGridView_selectedIndicator, SELECTED_INDICTOR);
+        unSelectedIndicator=typedArray.getResourceId(R.styleable.PageGridView_unSelectedIndicator, UN_SELECTED_INDICTOR);
 
         typedArray.recycle();
     }

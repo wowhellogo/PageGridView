@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/vpgridviewlibrary" />
+            <option value="$PROJECT_DIR$/pagegridviewlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

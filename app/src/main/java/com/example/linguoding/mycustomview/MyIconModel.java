@@ -2,9 +2,9 @@ package com.example.linguoding.mycustomview;
 
 import android.widget.ImageView;
 
-import com.vpgridviewlibrary.VpGridView;
+import com.pagegridviewlibrary.PageGridView;
 
-public class MyIconModel extends VpGridView.ItemModel {
+public class MyIconModel extends PageGridView.ItemModel {
     private String name;
 
 

@@ -2,10 +2,9 @@ package com.example.linguoding.mycustomview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
-import com.vpgridviewlibrary.VpGridView;
+import com.pagegridviewlibrary.PageGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +13,15 @@ public class MainActivity extends AppCompatActivity {
 
     List<MyIconModel> mList;
 
-    private VpGridView<MyIconModel> mVpGridView;
+    private PageGridView<MyIconModel> mPageGridView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mVpGridView=findViewById(R.id.vp_grid_view);
+        mPageGridView =findViewById(R.id.vp_grid_view);
         initData();
-        mVpGridView.setData(mList);
-        mVpGridView.setOnItemClickListener(new VpGridView.OnItemClickListener() {
+        mPageGridView.setData(mList);
+        mPageGridView.setOnItemClickListener(new PageGridView.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(MainActivity.this,position+"",Toast.LENGTH_SHORT).show();
