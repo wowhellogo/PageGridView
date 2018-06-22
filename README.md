@@ -11,8 +11,7 @@ selectedIndicator       | 选中指示点资源ID        | R.mipmap.ic_dot_selec
 unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_normal
 
 ## 效果图
-
-![效果图](/img/image1.jpg  =768x1028)
+<img src="./img/image1.jpg"  height="800" width="480">
 
 
 ## VpGridView使用
