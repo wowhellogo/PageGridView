@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VpGridView">
+        <!--每页大小-->
+        <attr name="pageSize" format="integer|reference"/>
+        <!--是否显示指示点-->
+        <attr name="isShowIndicator" format="boolean"/>
+        <!--选中指示点-->
+        <attr name="selectedIndicator" format="reference"/>
+        <!--未选中指示点-->
+        <attr name="unSelectedIndicator" format="reference"/>
+        <!--列数-->
+        <attr name="numColumns" format="integer|reference"/>
+
+    </declare-styleable>
+</resources>
