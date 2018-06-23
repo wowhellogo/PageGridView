@@ -39,6 +39,13 @@ itemView                | Item布局               | R.layout.item_view
 
 
 
+```groovy
+
+implementation 'com.wihaohao:PageGridView:1.0.0'
+
+
+```
+
 ## 一行四列效果图
 <img src="./img/image1.jpg"  height="800" width="480">
 
