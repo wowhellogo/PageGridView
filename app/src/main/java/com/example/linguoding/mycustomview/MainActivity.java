@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         mList=new ArrayList<>();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<30;i++){
             mList.add(new MyIconModel("测试"+i,R.mipmap.ic_launcher));
         }
     }

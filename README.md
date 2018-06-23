@@ -1,7 +1,7 @@
 # PageGridView
 ViewPager+GridView组合控件实现网格布局分页效果
 
-## PageGridView自定义属性：
+## PageGridView自定义属性
 属性名 | 说明 | 默认值
 :----------- | :----------- | :-----------
 pageSize                | 每页大小               | 8
@@ -10,12 +10,15 @@ isShowIndicator         | 是否显示指示器          | true
 selectedIndicator       | 选中指示点资源ID        | R.mipmap.ic_dot_selected
 unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_normal
 
-## 效果图
+## 一行四列效果图
 <img src="./img/image1.jpg"  height="800" width="480">
+
+## 两行四列效果图
+<img src="./img/image2.jpg"  height="800" width="480">
 
 
 ## PageGridView使用
-### 布局
+### 一行4列的布局
 
 ```xml
 
@@ -33,6 +36,25 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
 
 
 ```
+
+### 两行4列的布局
+```xml
+
+<com.pagegridviewlibrary.PageGridView
+        android:id="@+id/vp_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:numColumns="4"
+        app:pageSize="8"
+        app:selectedIndicator="@mipmap/ic_dot_selected"
+        app:unSelectedIndicator="@mipmap/ic_dot_normal"
+        app:isShowIndicator="true"
+        />
+
+```
+
+
+
 ### Model
 继承VpGridView.ItemModel 为item赋值和设置图标
 
@@ -107,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         mList=new ArrayList<>();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<30;i++){
             mList.add(new MyIconModel("测试"+i,R.mipmap.ic_launcher));
         }
     }
