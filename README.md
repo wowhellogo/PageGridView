@@ -43,7 +43,7 @@ itemView                | Item布局               | R.layout.item_view
 <img src="./img/image2.jpg"  height="800" width="480">
 
 ## 自定义Item布局效果图
-<img src="./img/image3.jpg"  height="800" width="480">
+<img src="./img/image3.png"  height="800" width="480">
 
 
 ## PageGridView使用
