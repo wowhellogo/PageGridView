@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="5dp"
+    android:background="@drawable/selector_item_view_bg"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height">
     <ImageView

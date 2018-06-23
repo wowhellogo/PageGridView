@@ -179,17 +179,17 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
             GridView gridView = new GridView(mContext);
             gridView.setNumColumns(numColumns);
             gridView.setOverScrollMode(OVER_SCROLL_NEVER);
-            gridView.setAdapter(new GridViewAdapter(mContext, mDatas, i, pageSize));
+
+            GridViewAdapter gridViewAdapter = new GridViewAdapter(mContext, mDatas, i, pageSize);
+            gridView.setAdapter(gridViewAdapter);
             mPagerList.add(gridView);
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            gridViewAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(int position) {
                     int pos = position + curIndex * pageSize;
                     if (null != mOnItemClickListener) {
                         mOnItemClickListener.onItemClick(pos);
                     }
-
-
                 }
             });
         }
@@ -271,6 +271,9 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
     class GridViewAdapter<T extends ItemModel> extends BaseAdapter {
         private List<T> mDatas;
         private LayoutInflater inflater;
+
+        private OnItemClickListener mOnItemClickListener;
+
         /**
          * 页数下标,从0开始(当前是第几页)
          */
@@ -312,7 +315,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = null;
             if (convertView == null) {
                 convertView = inflater.inflate(mItemView, parent, false);
@@ -336,9 +339,21 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
             }
 
             mDatas.get(pos).setItemView(viewHolder.itemView);
+            viewHolder.itemView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (null != mOnItemClickListener) {
+                        mOnItemClickListener.onItemClick(position);
+                    }
+                }
+            });
             return convertView;
         }
 
+
+        public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+            mOnItemClickListener = onItemClickListener;
+        }
 
         class ViewHolder {
             public View itemView;

@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion 26
 
@@ -31,4 +33,24 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+publish {
+    userOrg = 'wihaohao'//bintray.com用户名
+    groupId = 'com.wihaohao'//jcenter上的路径
+    artifactId = 'PageGridView'//项目名称
+    publishVersion = '1.0.0'//版本号不重要
+    desc = 'ViewPager+GridView组合控件实现网格布局分页效果的library'//描述
+    website = 'https://github.com/wihaohao/PageGridView'//网站，不重要；尽量模拟github上的地址
+}
+
+publish {
+    artifactId = 'PageGridView'
+    uploadName = 'PageGridView'
+    publishVersion = '1.0.0'
+    desc = 'ViewPager+GridView组合控件实现网格布局分页效果的library'
+    website = 'https://github.com/wihaohao/PageGridView'//网站，不重要；尽量模拟github上的地址
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    licences = rootProject.licences
 }
