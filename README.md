@@ -1,6 +1,16 @@
 # PageGridView
 ViewPager+GridView组合控件实现网格布局分页效果
 
+## PageGridView 特点
+
+- 没有依赖任何第三方
+- 可自由定制Item布局
+- 无需写adapter适配器
+- 只需实体类继承ItemModel即可
+- 可显示本地图、网络图、资源ID图标，由开发者实现
+- 根据pageSize,numColumns动态计算PageGridView高度，不需要在布局里面写固定高度
+
+
 ## PageGridView自定义属性
 属性名 | 说明 | 默认值
 :----------- | :----------- | :-----------
@@ -9,6 +19,22 @@ numColumns              | 列数                   | 4
 isShowIndicator         | 是否显示指示器          | true
 selectedIndicator       | 选中指示点资源ID        | R.mipmap.ic_dot_selected
 unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_normal
+indicatorGravity        | 指示器位置             | center
+indicatorPaddingLeft    | 指示器左内边距          | 0px
+indicatorPaddingRight   | 指示器右内边距          | 0px
+indicatorPaddingTop     | 指示器上内边距          | 0px
+indicatorPaddingBottom  | 指示器下内边距          | 0px
+indicatorPadding        | 指示器内边距            | 0px
+indicatorBackground     | 指示器背景颜色          | Color.WHITE 
+itemView                | Item布局               | R.layout.item_view
+
+
+## 约定规则
+1. 自定义Item布局必须给定具体高度，如：80dp或者@dimen/item_height
+2. 自定义Item布局 TextView的id 为R.id.tv_item_name
+3. 自定义Item布局 ImageView的id 为R.id.iv_item_icon
+
+
 
 ## 一行四列效果图
 <img src="./img/image1.jpg"  height="800" width="480">
@@ -16,12 +42,27 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
 ## 两行四列效果图
 <img src="./img/image2.jpg"  height="800" width="480">
 
+## 自定义Item布局效果图
+<img src="./img/image3.jpg"  height="800" width="480">
+
 
 ## PageGridView使用
+
+### 默认布局
+一般默认参数即可满足需求
+```xml
+<com.pagegridviewlibrary.PageGridView
+          android:id="@+id/vp_grid_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+          
+```
+
+
 ### 一行4列的布局
 
 ```xml
-
 
   <com.pagegridviewlibrary.PageGridView
           android:id="@+id/vp_grid_view"
@@ -40,23 +81,73 @@ unSelectedIndicator     | 未选中指示点资源ID      | R.mipmap.ic_dot_norm
 ### 两行4列的布局
 ```xml
 
-<com.pagegridviewlibrary.PageGridView
+    <com.pagegridviewlibrary.PageGridView
         android:id="@+id/vp_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:indicatorPadding="10dp"
+        app:isShowIndicator="true"
+        app:itemView="@layout/my_item_view"
         app:numColumns="4"
         app:pageSize="8"
         app:selectedIndicator="@mipmap/ic_dot_selected"
-        app:unSelectedIndicator="@mipmap/ic_dot_normal"
+        app:unSelectedIndicator="@mipmap/ic_dot_normal" />
+
+```
+
+### 自定义Item布局
+```xml
+
+ <com.pagegridviewlibrary.PageGridView
+        android:id="@+id/p_grid_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:indicatorGravity="right"
+        app:indicatorPaddingRight="@dimen/padding_10"
         app:isShowIndicator="true"
-        />
+        app:itemView="@layout/item_custom"
+        app:indicatorBackground="@color/colorPrimary"
+        app:numColumns="5"
+        app:pageSize="5"/>
+
 
 ```
 
 
+### ItemModel
+
+```java
+
+public abstract static class ItemModel {
+        /**
+         * 返回item名字
+         *
+         * @return
+         */
+        protected abstract String getItemName();
+
+        /**
+         * 设置图标
+         *
+         * @param imageView
+         */
+        protected abstract void setIcon(ImageView imageView);
+
+        /**
+         * 特殊需求，重写该方法，设置item
+         *
+         * @param itemView
+         */
+        protected void setItemView(View itemView) {
+
+        }
+    }
+
+
+```
 
 ### Model
-继承VpGridView.ItemModel 为item赋值和设置图标
+### 继承VpGridView.ItemModel 为item赋值和设置图标
 
 ```java
 
@@ -101,15 +192,51 @@ public class MyIconModel extends PageGridView.ItemModel {
 
 ```
 
-### setData
+### 继承VpGridView.ItemModel 设置ItemView
+
+```java
+
+public class CustomModel extends PageGridView.ItemModel {
+
+    public String title;
+
+    public CustomModel(String title) {
+        this.title = title;
+    }
+
+    @Override
+    protected String getItemName() {
+        return null;
+    }
+
+    @Override
+    protected void setIcon(ImageView imageView) {
+
+    }
+
+    @Override
+    protected void setItemView(View itemView) {
+        TextView textView= (TextView) itemView;
+        textView.setText(title);
+    }
+}
+
+
+```
+
+
+
+### PageGridView的使用
 
 ```java
 
 public class MainActivity extends AppCompatActivity {
 
     List<MyIconModel> mList;
+    List<CustomModel> mList2;
 
     private PageGridView<MyIconModel> mPageGridView;
+    private PageGridView<CustomModel> mPageGridView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,13 +251,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //自定义item
+        mPageGridView2=findViewById(R.id.p_grid_view2);
+        mPageGridView2.setData(mList2);
+
 
     }
 
     private void initData() {
         mList=new ArrayList<>();
+        mList2=new ArrayList<>();
         for(int i=0;i<30;i++){
             mList.add(new MyIconModel("测试"+i,R.mipmap.ic_launcher));
+            mList2.add(new CustomModel("标题"+i));
         }
     }
 }

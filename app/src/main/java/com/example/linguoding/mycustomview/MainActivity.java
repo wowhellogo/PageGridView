@@ -12,8 +12,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     List<MyIconModel> mList;
+    List<CustomModel> mList2;
 
     private PageGridView<MyIconModel> mPageGridView;
+    private PageGridView<CustomModel> mPageGridView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +30,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //自定义item
+        mPageGridView2=findViewById(R.id.p_grid_view2);
+        mPageGridView2.setData(mList2);
+
 
     }
 
     private void initData() {
         mList=new ArrayList<>();
+        mList2=new ArrayList<>();
         for(int i=0;i<30;i++){
             mList.add(new MyIconModel("测试"+i,R.mipmap.ic_launcher));
+            mList2.add(new CustomModel("标题"+i));
         }
     }
 }

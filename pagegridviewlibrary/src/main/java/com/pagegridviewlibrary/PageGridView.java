@@ -2,12 +2,14 @@ package com.pagegridviewlibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.annotation.DimenRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +31,15 @@ import java.util.List;
  * ViewPager+GridView实现左右滑动查看更多分类的控件
  */
 public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout {
-    public final static int PAGE_Size = 8;
-    public final static int NUM_COUNT = 4;
-    public final static boolean IS_ShOW_INDICATOR = true;
-    public final static int SELECTED_INDICTOR= R.mipmap.ic_dot_selected;
-    public final static int UN_SELECTED_INDICTOR=R.mipmap.ic_dot_normal;
-
+    public final static int DEFAULT_PAGE_Size = 8;
+    public final static int DEFAULT_NUM_COUNT = 4;
+    public final static boolean DEFAULT_IS_ShOW_INDICATOR = true;
+    public final static int DEFAULT_SELECTED_INDICTOR = R.mipmap.ic_dot_selected;
+    public final static int DEFAULT_UN_SELECTED_INDICTOR = R.mipmap.ic_dot_normal;
+    public final static int DEFAULT_ITEM_VIEW = R.layout.item_view;
+    public final static int DEFAULT_INDICATOR_GRAVITY = 1;
+    public final static int DEFAULT_INDICATOR_PADDING = 0;
+    public final static int DEFAULT_INDICATOR_Background = Color.WHITE;
     private Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
@@ -57,10 +62,42 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
      */
     private int curIndex = 0;
 
+    /**
+     * 列数
+     */
     private int numColumns = 0;
+    /**
+     * 指示器位置
+     */
+    private int indicatorGravity;
+    /**
+     * 是否显示指示器
+     */
     private boolean isShowIndicator;
+    /**
+     * 选中指示器资源ID
+     */
     private int selectedIndicator;
+    /**
+     * 未选中指示器资源ID
+     */
     private int unSelectedIndicator;
+    /**
+     * Item布局
+     */
+    private int mItemView;
+    /**
+     * 指示器内边距
+     */
+    private int indicatorPaddingLeft;
+    private int indicatorPaddingRight;
+    private int indicatorPaddingTop;
+    private int indicatorPaddingBottom;
+    private int indicatorPadding;
+    /**
+     * 指示器背景颜色
+     */
+    private int indicatorBackground;
 
 
     public PageGridView(Context context) {
@@ -81,12 +118,19 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
 
     private void initAttrs(Context context, AttributeSet attributeSet) {
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.PageGridView);
-        pageSize = typedArray.getInteger(R.styleable.PageGridView_pageSize, PAGE_Size);
-        numColumns = typedArray.getInteger(R.styleable.PageGridView_numColumns, NUM_COUNT);
-        isShowIndicator = typedArray.getBoolean(R.styleable.PageGridView_isShowIndicator, IS_ShOW_INDICATOR);
-        selectedIndicator=typedArray.getResourceId(R.styleable.PageGridView_selectedIndicator, SELECTED_INDICTOR);
-        unSelectedIndicator=typedArray.getResourceId(R.styleable.PageGridView_unSelectedIndicator, UN_SELECTED_INDICTOR);
-
+        pageSize = typedArray.getInteger(R.styleable.PageGridView_pageSize, DEFAULT_PAGE_Size);
+        numColumns = typedArray.getInteger(R.styleable.PageGridView_numColumns, DEFAULT_NUM_COUNT);
+        isShowIndicator = typedArray.getBoolean(R.styleable.PageGridView_isShowIndicator, DEFAULT_IS_ShOW_INDICATOR);
+        selectedIndicator = typedArray.getResourceId(R.styleable.PageGridView_selectedIndicator, DEFAULT_SELECTED_INDICTOR);
+        unSelectedIndicator = typedArray.getResourceId(R.styleable.PageGridView_unSelectedIndicator, DEFAULT_UN_SELECTED_INDICTOR);
+        mItemView = typedArray.getResourceId(R.styleable.PageGridView_itemView, DEFAULT_ITEM_VIEW);
+        indicatorGravity = typedArray.getInt(R.styleable.PageGridView_indicatorGravity, DEFAULT_INDICATOR_GRAVITY);
+        indicatorPaddingLeft = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPaddingLeft, DEFAULT_INDICATOR_PADDING);
+        indicatorPaddingRight = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPaddingRight, DEFAULT_INDICATOR_PADDING);
+        indicatorPaddingTop = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPaddingTop, DEFAULT_INDICATOR_PADDING);
+        indicatorPaddingBottom = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPaddingBottom, DEFAULT_INDICATOR_PADDING);
+        indicatorPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPadding, -1);
+        indicatorBackground = typedArray.getColor(R.styleable.PageGridView_indicatorBackground, DEFAULT_INDICATOR_Background);
         typedArray.recycle();
     }
 
@@ -95,20 +139,38 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         mInflater = LayoutInflater.from(mContext);
         mContentView = mInflater.inflate(R.layout.vp_gridview, this, true);
         mViewPager = mContentView.findViewById(R.id.view_pager);
-        RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout
+                .LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         //动态设置ViewPager
-        float rate= (float) pageSize / (float) numColumns;
-        int rows= (int) Math.ceil(rate);
-        layoutParams.height=rows*getDimensionPixelOffset(R.dimen.item_height);
+        float rate = (float) pageSize / (float) numColumns;
+        int rows = (int) Math.ceil(rate);
+        View itemView = mInflater.inflate(mItemView, this, false);
+
+        ViewGroup.LayoutParams itemLayoutParams = itemView.getLayoutParams();
+        int itemHeight = itemLayoutParams.height;
+
+        layoutParams.height = rows * itemHeight;
         mViewPager.setLayoutParams(layoutParams);
         mLlDot = mContentView.findViewById(R.id.ll_dot);
+        if (indicatorGravity == 0) {
+            mLlDot.setGravity(Gravity.LEFT);
+        } else if (indicatorGravity == 1) {
+            mLlDot.setGravity(Gravity.CENTER);
+        } else if (indicatorGravity == 2) {
+            mLlDot.setGravity(Gravity.RIGHT);
+        }
+        if (indicatorPadding != -1) {
+            mLlDot.setPadding(indicatorPadding, indicatorPadding, indicatorPadding, indicatorPadding);
+        } else {
+            mLlDot.setPadding(indicatorPaddingLeft, indicatorPaddingTop, indicatorPaddingRight, indicatorPaddingBottom);
+        }
+        mLlDot.setBackgroundColor(indicatorBackground);
 
     }
 
 
-    public void setData(List<T> data){
-        this.mDatas=data;
+    public void setData(List<T> data) {
+        this.mDatas = data;
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
@@ -136,7 +198,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         //设置圆点
         if (isShowIndicator && pageCount > 1) {
             setOvalLayout();
-        }else{
+        } else {
             mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
                 public void onPageSelected(int position) {
                     curIndex = position;
@@ -151,7 +213,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
      * 设置圆点
      */
     public void setOvalLayout() {
-        if(mLlDot.getChildCount()>0) mLlDot.removeAllViews();
+        if (mLlDot.getChildCount() > 0) mLlDot.removeAllViews();
         for (int i = 0; i < pageCount; i++) {
             mLlDot.addView(mInflater.inflate(R.layout.dot, null));
         }
@@ -229,6 +291,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
             this.mDatas = data;
             notifyDataSetChanged();
         }
+
         /**
          * 先判断数据集的大小是否足够显示满本页,如果够，则直接返回每一页显示的最大条目个数pageSize,如果不够，则有几项就返回几,(也就是最后一页的时候就显示剩余item)
          */
@@ -252,10 +315,11 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = null;
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.item_view, parent, false);
+                convertView = inflater.inflate(mItemView, parent, false);
                 viewHolder = new ViewHolder();
-                viewHolder.tv = convertView.findViewById(R.id.tv_item_name);
+                viewHolder.itemView = convertView;
                 viewHolder.iv = convertView.findViewById(R.id.im_item_icon);
+                viewHolder.tv = convertView.findViewById(R.id.tv_item_name);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -264,18 +328,24 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
              * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize
              */
             int pos = position + curIndex * pageSize;
-            viewHolder.tv.setText(mDatas.get(pos).getItemName());
-            mDatas.get(pos).setIcon(viewHolder.iv);
+            if (null != viewHolder.tv) {
+                viewHolder.tv.setText(mDatas.get(pos).getItemName());
+            }
+            if (null != viewHolder.iv) {
+                mDatas.get(pos).setIcon(viewHolder.iv);
+            }
+
+            mDatas.get(pos).setItemView(viewHolder.itemView);
             return convertView;
         }
 
 
         class ViewHolder {
+            public View itemView;
             public TextView tv;
             public ImageView iv;
         }
     }
-
 
 
     private OnItemClickListener mOnItemClickListener;
@@ -290,9 +360,28 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
 
 
     public abstract static class ItemModel {
+        /**
+         * 返回item名字
+         *
+         * @return
+         */
         protected abstract String getItemName();
 
+        /**
+         * 设置图标
+         *
+         * @param imageView
+         */
         protected abstract void setIcon(ImageView imageView);
+
+        /**
+         * 特殊需求，重写该方法，设置item
+         *
+         * @param itemView
+         */
+        protected void setItemView(View itemView) {
+
+        }
     }
 
     /**
@@ -302,11 +391,11 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, mContext.getResources().getDisplayMetrics());
     }
 
-    public  int getDimensionPixelOffset(@DimenRes int resId) {
+    public int getDimensionPixelOffset(@DimenRes int resId) {
         return mContext.getResources().getDimensionPixelOffset(resId);
     }
 
-    class OnPageChangeListener implements ViewPager.OnPageChangeListener{
+    class OnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

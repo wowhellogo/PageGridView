@@ -2,15 +2,35 @@
 <resources>
     <declare-styleable name="PageGridView">
         <!--每页大小-->
-        <attr name="pageSize" format="integer|reference"/>
+        <attr name="pageSize" format="integer|reference" />
         <!--是否显示指示点-->
-        <attr name="isShowIndicator" format="boolean"/>
+        <attr name="isShowIndicator" format="boolean" />
         <!--选中指示点-->
-        <attr name="selectedIndicator" format="reference"/>
+        <attr name="selectedIndicator" format="reference" />
         <!--未选中指示点-->
-        <attr name="unSelectedIndicator" format="reference"/>
+        <attr name="unSelectedIndicator" format="reference" />
+        <!--指示器位置-->
+        <attr name="indicatorGravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <!--指示器左内边距-->
+        <attr name="indicatorPaddingLeft" format="dimension" />
+        <!--指示器右内边距-->
+        <attr name="indicatorPaddingRight" format="dimension" />
+        <!--指示器上内边距-->
+        <attr name="indicatorPaddingTop" format="dimension" />
+        <!--指示器下内边距-->
+        <attr name="indicatorPaddingBottom" format="dimension" />
+        <!--指示器内边距-->
+        <attr name="indicatorPadding" format="dimension" />
+        <!--指示器背景颜色-->
+        <attr name="indicatorBackground" format="color" />
         <!--列数-->
-        <attr name="numColumns" format="integer|reference"/>
+        <attr name="numColumns" format="integer|reference" />
+        <!--Item布局-->
+        <attr name="itemView" format="reference" />
 
     </declare-styleable>
 </resources>
