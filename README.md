@@ -3,7 +3,6 @@ ViewPager+GridView组合控件实现网格布局分页效果
 
 ## PageGridView 特点
 
-- 没有依赖任何第三方
 - 可自由定制Item布局
 - 无需写adapter适配器
 - 只需实体类继承ItemModel即可
@@ -30,7 +29,7 @@ itemView                | Item布局               | R.layout.item_view
 
 
 ## 约定规则
-1. Item布局必须给定具体高度，如：80dp或者@dimen/item_height
+1. Item布局高度默认为@dimen/item_height，@dimen/item_height=80，可自行修改覆盖
 2. Item布局 TextView的id 为R.id.tv_item_name
 3. Item布局 ImageView的id 为R.id.iv_item_icon
 4. Item默认点击效果R.drawable.selector_item_view_bg
