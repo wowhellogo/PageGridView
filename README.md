@@ -1,15 +1,6 @@
 # PageGridView
 ViewPager+GridView组合控件实现网格布局分页效果
 
-
-## Gradle 依赖库
-```groovy
-
-implementation 'com.wihaohao:PageGridView:1.0.0'
-
-
-```
-
 ## PageGridView 特点
 
 - 没有依赖任何第三方
@@ -60,6 +51,14 @@ itemView                | Item布局               | R.layout.item_view
 
 
 ## PageGridView使用
+
+### Gradle 依赖库
+```groovy
+
+implementation 'com.wihaohao:PageGridView:1.0.0'
+
+
+```
 
 ### 默认布局
 一般默认参数即可满足需求
