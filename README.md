@@ -4,10 +4,12 @@ ViewPager+GridView组合控件实现网格布局分页效果
 ## PageGridView 特点
 
 - 可自由定制Item布局
-- 无需写adapter适配器
+- 无需写adapter适配器,直接调用setData()方法填充数据
 - 只需实体类继承ItemModel即可
 - 可显示本地图、网络图、资源ID图标，由开发者实现
-- 根据pageSize,numColumns动态计算PageGridView高度，不需要在布局里面写固定高度
+- 动态计算PageGridView高度，不需要在布局里面写固定高度
+- 可重复setData()方法刷新数据
+- 不需要复制粘贴（重点）
 
 
 ## PageGridView自定义属性

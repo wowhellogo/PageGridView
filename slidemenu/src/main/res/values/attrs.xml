@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlideBottomPanel">
+        <attr name="contentView" format="reference" />
+        <attr name="bottomView" format="reference" />
+        <attr name="fade" format="boolean" />
+    </declare-styleable>
+</resources>

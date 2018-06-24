@@ -1,42 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.slidemenu.SlideBottomPanel xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <com.pagegridviewlibrary.PageGridView
-        android:id="@+id/vp_grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:indicatorPadding="10dp"
-        app:isShowIndicator="true"
-        app:itemView="@layout/my_item_view"
-        app:numColumns="4"
-        app:pageSize="8"
-        app:selectedIndicator="@mipmap/ic_dot_selected"
-        app:unSelectedIndicator="@mipmap/ic_dot_normal" />
-
-    <!--自定义Item-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="#ffffffff"
-        android:text="自定义Item布局" />
-
-    <com.pagegridviewlibrary.PageGridView
-        android:id="@+id/p_grid_view2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:indicatorGravity="right"
-        app:indicatorPaddingRight="@dimen/padding_10"
-        app:isShowIndicator="false"
-        app:itemView="@layout/item_custom"
-        app:indicatorBackground="@color/colorPrimary"
-        app:numColumns="5"
-        app:pageSize="5"/>
-
-
-</LinearLayout>
+    app:bottomView="@layout/bottom_layout"
+    app:contentView="@layout/content_layout"
+    app:fade="true"
+    tools:context=".MainActivity" />
