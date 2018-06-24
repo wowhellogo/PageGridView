@@ -1,1 +1,1 @@
-include ':app', ':pagegridviewlibrary', ':slidemenu'
+include ':app', ':pagegridview', ':slidemenu'

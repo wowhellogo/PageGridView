@@ -20,7 +20,7 @@
             android:text="底部内容" />
     </LinearLayout>
 
-    <com.pagegridviewlibrary.PageGridView
+    <com.wihaohoa.PageGridView
         android:id="@+id/bottom_page_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

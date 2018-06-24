@@ -1,4 +1,4 @@
-package com.slidemenu;
+package com.wihaohao;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,12 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slidemenu.R;
-
-import static android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED;
-import static android.support.design.widget.BottomSheetBehavior.STATE_DRAGGING;
-import static android.support.design.widget.BottomSheetBehavior.STATE_EXPANDED;
-import static android.support.design.widget.BottomSheetBehavior.STATE_HIDDEN;
-import static android.support.design.widget.BottomSheetBehavior.STATE_SETTLING;
 
 /**
  * 利用bottom_sheet_behavior实现底部划动菜单

@@ -64,7 +64,7 @@ implementation 'com.wihaohao:PageGridView:1.0.0'
 ### 默认布局
 一般默认参数即可满足需求
 ```xml
-<com.pagegridviewlibrary.PageGridView
+<com.wihaohoa.PageGridView
           android:id="@+id/vp_grid_view"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -77,7 +77,7 @@ implementation 'com.wihaohao:PageGridView:1.0.0'
 
 ```xml
 
-  <com.pagegridviewlibrary.PageGridView
+  <com.wihaohoa.PageGridView
           android:id="@+id/vp_grid_view"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -94,7 +94,7 @@ implementation 'com.wihaohao:PageGridView:1.0.0'
 ### 两行4列的布局
 ```xml
 
-    <com.pagegridviewlibrary.PageGridView
+    <com.wihaohoa.PageGridView
         android:id="@+id/vp_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@ implementation 'com.wihaohao:PageGridView:1.0.0'
 ### 自定义Item布局
 ```xml
 
- <com.pagegridviewlibrary.PageGridView
+ <com.wihaohoa.PageGridView
         android:id="@+id/p_grid_view2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pagegridviewlibrary.PageGridView;
+import com.wihaohoa.PageGridView;
 
 public class CustomModel extends PageGridView.ItemModel {
 

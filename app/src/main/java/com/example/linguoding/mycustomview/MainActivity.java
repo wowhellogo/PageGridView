@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.pagegridviewlibrary.PageGridView;
+import com.wihaohoa.PageGridView;
 
 import java.util.ArrayList;
 import java.util.List;
