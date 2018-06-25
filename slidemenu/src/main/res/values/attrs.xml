@@ -4,5 +4,6 @@
         <attr name="contentView" format="reference" />
         <attr name="bottomView" format="reference" />
         <attr name="fade" format="boolean" />
+        <attr name="isHideable" format="boolean" />
     </declare-styleable>
 </resources>

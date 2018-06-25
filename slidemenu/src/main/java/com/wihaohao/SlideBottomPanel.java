@@ -27,6 +27,7 @@ public class SlideBottomPanel extends CoordinatorLayout {
     private BottomSheetBehavior mBottomSheetBehavior;
     private View mBlackView;
     private boolean isFade;
+    private boolean isHideable=true;
     public static final float MAX_ALPHA = 0.6f;
     private int alpha = 0x00;
 
@@ -62,6 +63,7 @@ public class SlideBottomPanel extends CoordinatorLayout {
                 mBottomView = mLayoutInflater.inflate(typedArray.getResourceId(R.styleable.SlideBottomPanel_bottomView, 0), this, false);
             }
             isFade = typedArray.getBoolean(R.styleable.SlideBottomPanel_fade, false);
+            isHideable=typedArray.getBoolean(R.styleable.SlideBottomPanel_isHideable,true);
             typedArray.recycle();
         }
 
@@ -78,7 +80,7 @@ public class SlideBottomPanel extends CoordinatorLayout {
         }
         CoordinatorLayout.LayoutParams bottomLayoutParams = (LayoutParams) mBottomView.getLayoutParams();
         bottomLayoutParams.setBehavior(mBottomSheetBehavior = new BottomSheetBehavior());
-        mBottomSheetBehavior.setHideable(true);
+        mBottomSheetBehavior.setHideable(isHideable);
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
