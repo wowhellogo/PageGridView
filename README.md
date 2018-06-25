@@ -55,7 +55,7 @@ itemView                | Item布局               | R.layout.item_view
 ### Gradle 依赖库
 ```groovy
 
-implementation 'com.wihaohao:PageGridView:1.0.0'
+implementation 'com.wihaohao:PageGridView:1.0.1'
 
 
 ```
