@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -36,18 +36,9 @@ dependencies {
 }
 
 publish {
-    userOrg = 'wihaohao'//bintray.com用户名
-    groupId = 'com.wihaohao'//jcenter上的路径
-    artifactId = 'PageGridView'//项目名称
-    publishVersion = '1.0.0'//版本号不重要
-    desc = 'ViewPager+GridView组合控件实现网格布局分页效果的library'//描述
-    website = 'https://github.com/wihaohao/PageGridView'//网站，不重要；尽量模拟github上的地址
-}
-
-publish {
     artifactId = 'PageGridView'
     uploadName = 'PageGridView'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'ViewPager+GridView组合控件实现网格布局分页效果的library'
     website = 'https://github.com/wihaohao/PageGridView'//网站，不重要；尽量模拟github上的地址
     userOrg = rootProject.userOrg
