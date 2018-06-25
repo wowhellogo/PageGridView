@@ -2,7 +2,7 @@ package com.example.linguoding.mycustomview;
 
 import android.widget.ImageView;
 
-import com.wihaohoa.PageGridView;
+import com.wihaohao.PageGridView;
 
 public class MyIconModel extends PageGridView.ItemModel {
     private String name;

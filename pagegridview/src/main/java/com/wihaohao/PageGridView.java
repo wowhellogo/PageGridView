@@ -1,4 +1,4 @@
-package com.wihaohoa;
+package com.wihaohao;
 
 import android.content.Context;
 import android.content.res.TypedArray;
