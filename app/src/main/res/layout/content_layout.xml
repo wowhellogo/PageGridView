@@ -16,8 +16,7 @@
         app:itemView="@layout/my_item_view"
         app:numColumns="4"
         app:pageSize="8"
-        app:selectedIndicator="@mipmap/ic_dot_selected"
-        app:unSelectedIndicator="@mipmap/ic_dot_normal" />
+        />
 
     <!--自定义Item-->
     <TextView
@@ -37,6 +36,13 @@
         app:indicatorBackground="@color/colorPrimary"
         app:numColumns="5"
         app:pageSize="5"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="动态添加"
+        android:onClick="addData"
+        />
 
 
 </LinearLayout>

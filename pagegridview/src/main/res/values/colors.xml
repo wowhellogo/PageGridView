@@ -2,5 +2,6 @@
 <resources>
     <color name="item_view_selected_color">#cfcfcf</color>
     <color name="item_view_normal_color">#FFFFFFFF</color>
+    <color name="dot_selected_color">#ababab</color>
 
 </resources>

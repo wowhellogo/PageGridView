@@ -2,6 +2,9 @@ package com.example.linguoding.mycustomview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.wihaohao.PageGridView;
@@ -48,10 +51,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void addData(View view){
+        for (int i = 0; i < 5; i++) {
+            mList.add(new MyIconModel("测试" + i, R.mipmap.ic_launcher));
+            mList2.add(new CustomModel("标题" + i));
+        }
+        mPageGridView3.setData(mList);
+        mPageGridView.setData(mList);
+        mPageGridView2.setData(mList2);
+    }
+
     private void initData() {
         mList = new ArrayList<>();
         mList2 = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 5; i++) {
             mList.add(new MyIconModel("测试" + i, R.mipmap.ic_launcher));
             mList2.add(new CustomModel("标题" + i));
         }

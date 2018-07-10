@@ -33,8 +33,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
     public final static int DEFAULT_PAGE_Size = 8;
     public final static int DEFAULT_NUM_COUNT = 4;
     public final static boolean DEFAULT_IS_ShOW_INDICATOR = true;
-    public final static int DEFAULT_SELECTED_INDICTOR = R.mipmap.ic_dot_selected;
-    public final static int DEFAULT_UN_SELECTED_INDICTOR = R.mipmap.ic_dot_normal;
+    public final static int DEFAULT_SELECTED_INDICTOR = R.drawable.shape_dot_selected;
+    public final static int DEFAULT_UN_SELECTED_INDICTOR = R.drawable.shape_dot_normal;
     public final static int DEFAULT_ITEM_VIEW = R.layout.item_view;
     public final static int DEFAULT_INDICATOR_GRAVITY = 1;
     public final static int DEFAULT_INDICATOR_PADDING = 0;
@@ -173,6 +173,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
+        curIndex=0;
         for (int i = 0; i < pageCount; i++) {
             // 每个页面都是inflate出一个新实例
             GridView gridView = new GridView(mContext);
@@ -215,12 +216,14 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         if (mLlDot.getChildCount() > 0) mLlDot.removeAllViews();
         for (int i = 0; i < pageCount; i++) {
             mLlDot.addView(mInflater.inflate(R.layout.dot, null));
+            ImageView imageView = mLlDot.getChildAt(i).findViewById(R.id.v_dot);
+            imageView.setImageResource(unSelectedIndicator);
         }
         // 默认显示第一页
         ImageView imageView = mLlDot.getChildAt(0).findViewById(R.id.v_dot);
-        imageView.setImageResource(selectedIndicator);
 
-        mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
+        imageView.setImageResource(selectedIndicator);
+        mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
             public void onPageSelected(int position) {
                 // 取消圆点选中
                 ImageView lastImageView = mLlDot.getChildAt(curIndex)
