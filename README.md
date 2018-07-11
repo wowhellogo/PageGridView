@@ -48,16 +48,20 @@ itemView                | Item布局               | R.layout.item_view
 ## 两行四列效果图
 <img src="./img/image2.jpg"  height="800" width="480">
 
-## 自定义Item布局效果图
-<img src="./img/image3.png"  height="800" width="480">
-
 
 ## PageGridView使用
 
 ### Gradle 依赖库
 ```groovy
+allprojects {
+    repositories {
+        maven{
+            url 'https://dl.bintray.com/lingguoding/maven/'
+        }
+    }
+}
 
-implementation 'com.wihaohao:PageGridView:1.0.1'
+implementation 'com.wihaohao:PageGridView:1.1.0'
 
 
 ```
