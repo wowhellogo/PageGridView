@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         app:indicatorPadding="10dp"
         app:isShowIndicator="true"
+        app:vpBackground="@color/colorAccent"
         app:itemView="@layout/my_item_view"
         app:numColumns="4"
         app:pageSize="8"

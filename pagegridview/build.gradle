@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.1.1"
+        versionCode 6
+        versionName "1.1.6"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -38,7 +38,7 @@ dependencies {
 publish {
     artifactId = 'PageGridView'
     uploadName = 'PageGridView'
-    publishVersion = '1.1.1'
+    publishVersion = '1.1.6'
     desc = 'ViewPager+GridView组合控件实现网格布局分页效果的library'
     website = 'https://github.com/wihaohao/PageGridView'//网站，不重要；尽量模拟github上的地址
     userOrg = rootProject.userOrg

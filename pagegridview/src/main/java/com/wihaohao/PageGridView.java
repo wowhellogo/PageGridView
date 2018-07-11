@@ -20,9 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.vpgridviewlibrary.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +32,12 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
     public final static boolean DEFAULT_IS_ShOW_INDICATOR = true;
     public final static int DEFAULT_SELECTED_INDICTOR = R.drawable.shape_dot_selected;
     public final static int DEFAULT_UN_SELECTED_INDICTOR = R.drawable.shape_dot_normal;
+    public final static int DEFAULT_VP_BACKGROUND = android.R.color.white;
     public final static int DEFAULT_ITEM_VIEW = R.layout.item_view;
     public final static int DEFAULT_INDICATOR_GRAVITY = 1;
     public final static int DEFAULT_INDICATOR_PADDING = 0;
-    public final static int DEFAULT_INDICATOR_Background = Color.WHITE;
+    public final static int DEFAULT_INDICATOR_BACKGROUND = Color.WHITE;
+    public final static int DEFAULT_VP_PADDING = 0;
     private Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
@@ -99,6 +98,11 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
     private int indicatorBackground;
 
 
+    /**
+     * ViewPager背景
+     */
+    private int vpBackground;
+
     public PageGridView(Context context) {
         this(context, null, 0);
     }
@@ -129,7 +133,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         indicatorPaddingTop = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPaddingTop, DEFAULT_INDICATOR_PADDING);
         indicatorPaddingBottom = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPaddingBottom, DEFAULT_INDICATOR_PADDING);
         indicatorPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPadding, -1);
-        indicatorBackground = typedArray.getColor(R.styleable.PageGridView_indicatorBackground, DEFAULT_INDICATOR_Background);
+        indicatorBackground = typedArray.getColor(R.styleable.PageGridView_indicatorBackground, DEFAULT_INDICATOR_BACKGROUND);
+        vpBackground = typedArray.getResourceId(R.styleable.PageGridView_vpBackground, DEFAULT_VP_BACKGROUND);
         typedArray.recycle();
     }
 
@@ -138,6 +143,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         mInflater = LayoutInflater.from(mContext);
         mContentView = mInflater.inflate(R.layout.vp_gridview, this, true);
         mViewPager = mContentView.findViewById(R.id.view_pager);
+        mViewPager.setBackgroundResource(vpBackground);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout
                 .LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         //动态设置ViewPager
@@ -147,7 +153,6 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
 
         ViewGroup.LayoutParams itemLayoutParams = itemView.getLayoutParams();
         int itemHeight = itemLayoutParams.height;
-
         layoutParams.height = rows * itemHeight;
         mViewPager.setLayoutParams(layoutParams);
         mLlDot = mContentView.findViewById(R.id.ll_dot);
@@ -173,7 +178,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
-        curIndex=0;
+        curIndex = 0;
         for (int i = 0; i < pageCount; i++) {
             // 每个页面都是inflate出一个新实例
             GridView gridView = new GridView(mContext);

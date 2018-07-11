@@ -61,7 +61,7 @@ allprojects {
     }
 }
 
-implementation 'com.wihaohao:PageGridView:1.1.0'
+implementation 'com.wihaohao:PageGridView:1.1.1'
 
 
 ```

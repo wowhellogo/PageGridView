@@ -13,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.slidemenu.R;
+import com.wihaohao.slidemenu.R;
+
 
 /**
  * 利用bottom_sheet_behavior实现底部划动菜单
