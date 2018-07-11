@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addData(View view){
+    public void addData(View view) {
         for (int i = 0; i < 5; i++) {
             mList.add(new MyIconModel("测试" + i, R.mipmap.ic_launcher));
             mList2.add(new CustomModel("标题" + i));
@@ -60,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
         mPageGridView.setData(mList);
         mPageGridView2.setData(mList2);
     }
+
+    public void restData(View view) {
+        mList = new ArrayList<>();
+        mList2 = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            mList.add(new MyIconModel("测试" + i, R.mipmap.ic_launcher));
+            mList2.add(new CustomModel("标题" + i));
+        }
+        mPageGridView3.setData(mList);
+        mPageGridView.setData(mList);
+        mPageGridView2.setData(mList2);
+    }
+
 
     private void initData() {
         mList = new ArrayList<>();
