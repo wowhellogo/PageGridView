@@ -199,7 +199,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         if (isShowIndicator && pageCount > 1) {
             setOvalLayout();
         } else {
-            mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
+            if (mLlDot.getChildCount() > 0) mLlDot.removeAllViews();
+            mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
                 public void onPageSelected(int position) {
                     curIndex = position;
                 }
