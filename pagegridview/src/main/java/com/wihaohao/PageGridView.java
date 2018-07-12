@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +104,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
      */
     private int vpBackground;
 
+    private int vpPadding;
+
     public PageGridView(Context context) {
         this(context, null, 0);
     }
@@ -135,6 +138,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         indicatorPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPadding, -1);
         indicatorBackground = typedArray.getColor(R.styleable.PageGridView_indicatorBackground, DEFAULT_INDICATOR_BACKGROUND);
         vpBackground = typedArray.getResourceId(R.styleable.PageGridView_vpBackground, DEFAULT_VP_BACKGROUND);
+        vpPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_vpPadding, 0);
         typedArray.recycle();
     }
 
@@ -144,6 +148,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         mContentView = mInflater.inflate(R.layout.vp_gridview, this, true);
         mViewPager = mContentView.findViewById(R.id.view_pager);
         mViewPager.setBackgroundResource(vpBackground);
+        mViewPager.setPadding(vpPadding, vpPadding, vpPadding, vpPadding);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout
                 .LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         //动态设置ViewPager
@@ -154,6 +159,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         ViewGroup.LayoutParams itemLayoutParams = itemView.getLayoutParams();
         int itemHeight = itemLayoutParams.height;
         layoutParams.height = rows * itemHeight;
+        layoutParams.height += vpPadding * 2;
+
         mViewPager.setLayoutParams(layoutParams);
         mLlDot = mContentView.findViewById(R.id.ll_dot);
         if (indicatorGravity == 0) {

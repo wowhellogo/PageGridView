@@ -11,13 +11,12 @@
         android:id="@+id/vp_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:indicatorPadding="10dp"
         app:isShowIndicator="true"
-        app:vpBackground="@color/colorAccent"
-        app:itemView="@layout/my_item_view"
         app:numColumns="4"
-        app:pageSize="8"
-        />
+        app:pageSize="12"
+        android:layout_margin="5dp"
+        app:vpBackground="@color/colorAccent"
+        app:vpPadding="1dp" />
 
     <!--自定义Item-->
     <TextView
@@ -30,27 +29,25 @@
         android:id="@+id/p_grid_view2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:indicatorBackground="@color/colorPrimary"
         app:indicatorGravity="right"
         app:indicatorPaddingRight="@dimen/padding_10"
         app:isShowIndicator="false"
         app:itemView="@layout/item_custom"
-        app:indicatorBackground="@color/colorPrimary"
         app:numColumns="5"
-        app:pageSize="5"/>
+        app:pageSize="5" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="动态添加"
         android:onClick="addData"
-        />
+        android:text="动态添加" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="重置"
         android:onClick="restData"
-        />
+        android:text="重置" />
 
 
 </LinearLayout>

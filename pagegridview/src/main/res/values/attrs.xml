@@ -28,9 +28,11 @@
         <!--指示器背景颜色-->
         <attr name="indicatorBackground" format="color" />
 
-
         <!--ViewPager背景资源-->
         <attr name="vpBackground" format="reference|color" />
+
+        <!--ViewPager 内边距-->
+        <attr name="vpPadding" format="dimension" />
         <!--列数-->
         <attr name="numColumns" format="integer|reference" />
         <!--Item布局-->
