@@ -27,6 +27,8 @@ indicatorPaddingBottom  | 指示器下内边距          | 0px
 indicatorPadding        | 指示器内边距            | 0px
 indicatorBackground     | 指示器背景颜色          | Color.WHITE 
 itemView                | Item布局               | R.layout.item_view
+vpBackground            | ViewPager 背景资源     | android.R.color.white
+vpPadding               | ViewPager 内边距       | 0px
 
 
 
@@ -61,7 +63,7 @@ allprojects {
     }
 }
 
-implementation 'com.wihaohao:PageGridView:1.1.1'
+implementation 'com.wihaohao:PageGridView:1.1.7'
 
 
 ```

@@ -138,7 +138,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         indicatorPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_indicatorPadding, -1);
         indicatorBackground = typedArray.getColor(R.styleable.PageGridView_indicatorBackground, DEFAULT_INDICATOR_BACKGROUND);
         vpBackground = typedArray.getResourceId(R.styleable.PageGridView_vpBackground, DEFAULT_VP_BACKGROUND);
-        vpPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_vpPadding, 0);
+        vpPadding = typedArray.getDimensionPixelOffset(R.styleable.PageGridView_vpPadding, DEFAULT_VP_PADDING);
         typedArray.recycle();
     }
 
