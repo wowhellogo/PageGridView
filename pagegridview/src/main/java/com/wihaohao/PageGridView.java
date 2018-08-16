@@ -444,4 +444,11 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
     }
 
 
+    public List<T> getDatas() {
+        return mDatas;
+    }
+
+    public T getItem(int position) {
+        return mDatas.get(position);
+    }
 }
