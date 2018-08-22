@@ -35,7 +35,7 @@ vpPadding               | ViewPager 内边距       | 0px
 ## 约定规则
 1. Item布局必须给定具体高度，默认itemView布局的高度为@dimen/item_height=80dp
 2. Item布局 TextView的id 为R.id.tv_item_name
-3. Item布局 ImageView的id 为R.id.iv_item_icon
+3. Item布局 ImageView的id 为R.id.im_item_icon
 4. Item默认点击效果R.drawable.selector_item_view_bg
 5. Item点击颜色值：R.color.item_view_selected_color
 6. Item背景颜色值：R.color.item_view_normal_color
