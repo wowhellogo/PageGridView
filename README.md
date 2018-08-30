@@ -167,7 +167,7 @@ public abstract static class ItemModel {
 ```
 
 ### Model
-### 继承VpGridView.ItemModel 为item赋值和设置图标
+### 继承PageGridView.ItemModel 为item赋值和设置图标
 
 ```java
 
@@ -212,7 +212,7 @@ public class MyIconModel extends PageGridView.ItemModel {
 
 ```
 
-### 继承VpGridView.ItemModel 设置ItemView
+### 继承PageGridView.ItemModel 设置ItemView
 
 ```java
 
