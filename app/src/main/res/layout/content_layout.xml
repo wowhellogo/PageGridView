@@ -11,10 +11,10 @@
         android:id="@+id/vp_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         app:isShowIndicator="true"
         app:numColumns="4"
         app:pageSize="12"
-        android:layout_margin="5dp"
         app:vpBackground="@color/colorAccent"
         app:vpPadding="1dp" />
 
@@ -48,6 +48,12 @@
         android:layout_height="wrap_content"
         android:onClick="restData"
         android:text="重置" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="selectedPosition"
+        android:text="选择1位置" />
 
 
 </LinearLayout>

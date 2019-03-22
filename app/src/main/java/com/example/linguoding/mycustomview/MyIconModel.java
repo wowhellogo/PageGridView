@@ -1,10 +1,11 @@
 package com.example.linguoding.mycustomview;
 
+import android.view.View;
 import android.widget.ImageView;
 
 import com.wihaohao.PageGridView;
 
-public class MyIconModel extends PageGridView.ItemModel {
+public class MyIconModel implements PageGridView.ItemModel {
     private String name;
 
 
@@ -33,12 +34,17 @@ public class MyIconModel extends PageGridView.ItemModel {
     }
 
     @Override
-    protected String getItemName() {
+    public String getItemName() {
         return name;
     }
 
     @Override
-    protected void setIcon(ImageView imageView) {
+    public void setIcon(ImageView imageView) {
         imageView.setImageResource(iconId);
+    }
+
+    @Override
+    public void setItemView(View itemView) {
+
     }
 }

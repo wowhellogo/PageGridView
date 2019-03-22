@@ -71,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         mPageGridView2.setData(mList2);
     }
 
+    public void selectedPosition(View view){
+        mPageGridView.setCurrentItem(1);
+    }
+
 
     private void initData() {
         mList = new ArrayList<>();

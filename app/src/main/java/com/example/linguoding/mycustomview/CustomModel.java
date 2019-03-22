@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.wihaohao.PageGridView;
 
-public class CustomModel extends PageGridView.ItemModel {
+public class CustomModel implements PageGridView.ItemModel {
 
     public String title;
 
@@ -15,17 +15,17 @@ public class CustomModel extends PageGridView.ItemModel {
     }
 
     @Override
-    protected String getItemName() {
+    public String getItemName() {
         return null;
     }
 
     @Override
-    protected void setIcon(ImageView imageView) {
+    public void setIcon(ImageView imageView) {
 
     }
 
     @Override
-    protected void setItemView(View itemView) {
+    public void setItemView(View itemView) {
         TextView textView= (TextView) itemView;
         textView.setText(title);
     }

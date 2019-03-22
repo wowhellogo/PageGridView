@@ -106,6 +106,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
 
     private int vpPadding;
 
+    private int selectedPosition = 0;
+
     public PageGridView(Context context) {
         this(context, null, 0);
     }
@@ -207,17 +209,7 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         }
         //设置适配器
         mViewPager.setAdapter(new ViewPagerAdapter(mPagerList));
-        //设置圆点
-        if (isShowIndicator && pageCount > 1) {
-            setOvalLayout();
-        } else {
-            if (mLlDot.getChildCount() > 0) mLlDot.removeAllViews();
-            mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
-                public void onPageSelected(int position) {
-                    curIndex = position;
-                }
-            });
-        }
+        setCurrentItem(selectedPosition);
 
 
     }
@@ -232,9 +224,8 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
             ImageView imageView = mLlDot.getChildAt(i).findViewById(R.id.v_dot);
             imageView.setImageResource(unSelectedIndicator);
         }
-        // 默认显示第一页
-        ImageView imageView = mLlDot.getChildAt(0).findViewById(R.id.v_dot);
-
+        // 默认显示
+        ImageView imageView = mLlDot.getChildAt(selectedPosition).findViewById(R.id.v_dot);
         imageView.setImageResource(selectedIndicator);
         mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
             public void onPageSelected(int position) {
@@ -389,29 +380,27 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
     }
 
 
-    public abstract static class ItemModel {
+    public interface ItemModel {
         /**
          * 返回item名字
          *
-         * @return
+         * @return 返回名字
          */
-        protected abstract String getItemName();
+        String getItemName();
 
         /**
          * 设置图标
          *
-         * @param imageView
+         * @param imageView item图标
          */
-        protected abstract void setIcon(ImageView imageView);
+        void setIcon(ImageView imageView);
 
         /**
          * 特殊需求，重写该方法，设置item
          *
-         * @param itemView
+         * @param itemView itemView
          */
-        protected void setItemView(View itemView) {
-
-        }
+        void setItemView(View itemView);
     }
 
     /**
@@ -441,6 +430,29 @@ public class PageGridView<T extends PageGridView.ItemModel> extends FrameLayout 
         public void onPageScrollStateChanged(int state) {
 
         }
+    }
+
+
+    public ViewPager getViewPager() {
+        return mViewPager;
+    }
+
+    public void setCurrentItem(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
+        mViewPager.setCurrentItem(selectedPosition);
+        //设置圆点
+        if (isShowIndicator && pageCount > 1) {
+            setOvalLayout();
+        } else {
+            if (mLlDot.getChildCount() > 0) mLlDot.removeAllViews();
+            mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+                public void onPageSelected(int position) {
+                    curIndex = position;
+                }
+            });
+        }
+
+
     }
 
 

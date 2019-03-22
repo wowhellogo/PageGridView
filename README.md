@@ -138,40 +138,38 @@ implementation 'com.wihaohao:PageGridView:1.1.8'
 
 ```java
 
-public abstract static class ItemModel {
+public interface ItemModel {
         /**
          * 返回item名字
          *
-         * @return
+         * @return 返回名字
          */
-        protected abstract String getItemName();
+        String getItemName();
 
         /**
          * 设置图标
          *
-         * @param imageView
+         * @param imageView item图标
          */
-        protected abstract void setIcon(ImageView imageView);
+        void setIcon(ImageView imageView);
 
         /**
          * 特殊需求，重写该方法，设置item
          *
-         * @param itemView
+         * @param itemView itemView
          */
-        protected void setItemView(View itemView) {
-
-        }
+        void setItemView(View itemView);
     }
 
 
 ```
 
 ### Model
-### 继承VpGridView.ItemModel 为item赋值和设置图标
+### 实现PageGridView.ItemModel 为item赋值和设置图标
 
 ```java
 
-public class MyIconModel extends PageGridView.ItemModel {
+public class MyIconModel implements PageGridView.ItemModel {
     private String name;
 
 
@@ -200,23 +198,29 @@ public class MyIconModel extends PageGridView.ItemModel {
     }
 
     @Override
-    protected String getItemName() {
+    public String getItemName() {
         return name;
     }
 
     @Override
-    protected void setIcon(ImageView imageView) {
+    public void setIcon(ImageView imageView) {
         imageView.setImageResource(iconId);
+    }
+
+    @Override
+    public void setItemView(View itemView) {
+
     }
 }
 
+
 ```
 
-### 继承VpGridView.ItemModel 设置ItemView
+### 实现PageGridView.ItemModel 设置ItemView
 
 ```java
 
-public class CustomModel extends PageGridView.ItemModel {
+public class CustomModel implements PageGridView.ItemModel {
 
     public String title;
 
@@ -225,17 +229,17 @@ public class CustomModel extends PageGridView.ItemModel {
     }
 
     @Override
-    protected String getItemName() {
+    public String getItemName() {
         return null;
     }
 
     @Override
-    protected void setIcon(ImageView imageView) {
+    public void setIcon(ImageView imageView) {
 
     }
 
     @Override
-    protected void setItemView(View itemView) {
+    public void setItemView(View itemView) {
         TextView textView= (TextView) itemView;
         textView.setText(title);
     }
